@@ -1,7 +1,11 @@
-import { useState } from "react"
+import React, { useState, createContext } from "react"
 import ListPerson from "./components/ListPerson";
+import Component01 from "./components/Component01";
 
+export const MyContext = createContext();
 function App() {
+
+  const [count, setCount] = useState(0);
   const [listPerson, setListPerson] = useState(
     [{
       id: 1,
@@ -25,9 +29,18 @@ function App() {
     }
     ]);
   return (
-    
-    <ListPerson lists={listPerson} />
-    
+
+    <>
+      <MyContext.Provider value={{
+        count,
+        setCount,
+      }}>
+        <Component01 />
+      </MyContext.Provider>
+
+      <ListPerson lists={listPerson} />
+    </>
+
   )
 }
 
